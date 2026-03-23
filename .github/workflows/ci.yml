@@ -10,6 +10,24 @@ on:
 
 
 jobs:
+  formatting:
+    name: Stylecheck code with Ruff
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install project
+        run: uv sync --frozen
+
+      - name: Run Ruff
+        run: uvx ruff check . --output-format=github
+
   test:
     name: Build and Test
     runs-on: ubuntu-latest
