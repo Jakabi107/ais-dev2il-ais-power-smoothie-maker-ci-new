@@ -1,0 +1,32 @@
+name: CI-Jakob
+
+on:
+  push:
+    branches: ["main"]
+
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Setup Python
+        run: uv python install
+
+      - name: Install project
+        run: uv sync --frozen
+
+      - name: Run tests
+        run: uv run pytest
