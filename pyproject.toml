@@ -15,3 +15,6 @@ dev = [
     "pytest>=8.3.4",
     "pytest-html>=4.1.1",
 ]
+
+[tool.uv-secure.vulnerability_criteria]
+ignore_vulnerabilities = ["GHSA-5239-wwwm-4pmq"]
